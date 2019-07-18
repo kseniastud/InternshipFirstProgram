@@ -30,7 +30,6 @@ public class SiteUrlTest {
         ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
         driver.switchTo().window(tabs2.get(1));
         String url1 = "http://nnmclub.to/";
-        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
         String url2 = driver.getCurrentUrl();
         Assert.assertEquals(url2,url1, "У страниц разные URL");
     }
