@@ -40,6 +40,8 @@ public class SiteUrlTest {
 
     @AfterTest
     public void closeAllTabs(){
-
+        driver.quit();
+        System.out.println("@AfterTest");
     }
+
 }
