@@ -24,9 +24,9 @@ public class SiteUrlTest {
         WebElement input = driver.findElement(By.xpath("//input[@name='q']"));
         input.sendKeys("nnm-club");
         input.submit();
-        WebElement search= driver.findElement(By
+        WebElement searchTheText= driver.findElement(By
                 .xpath("//*[contains(text(),'NNM-Club: Торрент-трекер')]"));
-        search.click();
+        searchTheText.click();
         ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
         driver.switchTo().window(tabs2.get(1));
         String url1 = "http://nnmclub.to/";
