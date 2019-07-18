@@ -16,7 +16,7 @@ public class SiteUrlTest {
     public void createChromeDriver(){
         System.setProperty("webdriver.chrome.driver", "\\StudentOksanaInternshipFirstProgram\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        System.out.println("@BeforeTest");
+        //System.out.println("@BeforeTest");
     }
 
     @Test
@@ -37,13 +37,13 @@ public class SiteUrlTest {
         driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
         String url2 = driver.getCurrentUrl();
         Assert.assertEquals(url2,url1, "У страниц разные URL");
-        System.out.println("@Test");
+        //System.out.println("@Test");
     }
 
     @AfterTest
     public void closeAllTabs(){
         driver.quit();
-        System.out.println("@AfterTest");
+        //System.out.println("@AfterTest");
     }
 
 }
