@@ -6,9 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+
 
 public class SiteUrlTest {
     private WebDriver driver;
@@ -16,34 +15,29 @@ public class SiteUrlTest {
     public void createChromeDriver(){
         System.setProperty("webdriver.chrome.driver", "\\StudentOksanaInternshipFirstProgram\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        //System.out.println("@BeforeTest");
+        driver.manage().window().maximize();      
     }
 
     @Test
     public void enterToTheSiteAndAssertion(){
         driver.get("https://www.google.ru/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        WebElement element = driver.findElement(By.xpath("//input[@name='q']"));
-        element.sendKeys("nnm-club");
-        element.submit();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        WebElement element1= driver.findElement(By
+        WebElement input = driver.findElement(By.xpath("//input[@name='q']"));
+        input.sendKeys("nnm-club");
+        input.submit();
+        WebElement search= driver.findElement(By
                 .xpath("//*[contains(text(),'NNM-Club: Торрент-трекер')]"));
-        element1.click();
+        search.click();
         ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
         driver.switchTo().window(tabs2.get(1));
-        String url1 = new String("http://nnmclub.to/");
+        String url1 = "http://nnmclub.to/";
         driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
         String url2 = driver.getCurrentUrl();
         Assert.assertEquals(url2,url1, "У страниц разные URL");
-        //System.out.println("@Test");
     }
 
     @AfterTest
-    public void closeAllTabs(){
+    public void closeBrowser(){
         driver.quit();
-        //System.out.println("@AfterTest");
     }
 
 }
