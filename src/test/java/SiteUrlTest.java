@@ -19,7 +19,7 @@ public class SiteUrlTest {
     }
 
     @Test
-    public void enterToTheSiteAndAssertion(){
+    public void enterToTheSiteAndAssertion() {
         driver.get("https://www.google.ru/");
         WebElement input = driver.findElement(By.xpath("//input[@name='q']"));
         input.sendKeys("nnm-club");
@@ -38,5 +38,6 @@ public class SiteUrlTest {
     public void closeBrowser(){
         driver.quit();
     }
+   
 
 }
