@@ -13,7 +13,7 @@ public class SiteUrlTest {
     private WebDriver driver;
     @BeforeTest
     public void createChromeDriver(){
-        System.setProperty("webdriver.chrome.driver", "\\automation\\driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "\\StudentOksanaInternshipFirstProgram\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
         System.out.println("@BeforeTest");
     }
