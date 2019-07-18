@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="SeleniumTest" verbose="1">
+    <test name="NNM-Club: Торрент-трекер">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="SiteUrlTest" />
+        </classes>
+    </test>
+</suite>
