@@ -13,14 +13,14 @@ import java.util.concurrent.TimeUnit;
 public class SiteUrlTest {
     private WebDriver driver;
     @BeforeTest
-    public void createChromeDriver(){
+    public void createChromeDriver() throws Exception {
         System.setProperty("webdriver.chrome.driver", "\\StudentOksanaInternshipFirstProgram\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
         //System.out.println("@BeforeTest");
     }
 
     @Test
-    public void enterToTheSiteAndAssertion(){
+    public void enterToTheSiteAndAssertion() throws Exception{
         driver.get("https://www.google.ru/");
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -41,7 +41,7 @@ public class SiteUrlTest {
     }
 
     @AfterTest
-    public void closeAllTabs(){
+    public void closeAllTabs() throws Exception{
         driver.quit();
         //System.out.println("@AfterTest");
     }
