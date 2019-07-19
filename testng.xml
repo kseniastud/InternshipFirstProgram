@@ -4,7 +4,12 @@
     <test name="NNM-Club: Торрент-трекер">
         <parameter name="browser" value="chrome" />
         <classes>
-            <class name="SiteUrlTest" />
+            <class name="SiteUrlTest">
+                <methods>
+                    <include name="enterToTheSiteAndAssertion"/>
+                    <include name="loginToTheSiteAndVerification"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
