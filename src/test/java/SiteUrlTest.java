@@ -37,21 +37,16 @@ public class SiteUrlTest {
     public void loginToTheSiteAndVerification(){
         driver.get("http://nnmclub.to");
         WebElement buttonAuthorization = driver.findElement(By
-                .xpath("//*[contains(text(),'Вход')]"));
+                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Вход')]"));
         buttonAuthorization.click();
         WebElement login = driver.findElement(By.name("username"));
         login.sendKeys("Ксения00788");
         WebElement password = driver.findElement(By.name("password"));
         password.sendKeys("zadanie");
-        WebElement buttonLogin =driver.findElement(By.className("mainoption"));
+        WebElement buttonLogin =driver.findElement(By.name("login");
         buttonLogin.click();
-        boolean isPresentButtonLogout = driver.findElements(By
-               .xpath("//*[contains(text(),'Выход [ Ксения00788 ]')]")).size()>0;
-        if (isPresentButtonLogout){
-            System.out.println("Вход на сайт был успешным");
-        }else {
-            System.out.println("Вход на сайт не был успешным");
-        }
+        Assert.assertTrue(driver.findElement(By
+                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Выход')]")).isDisplayed());
     }
 
     @AfterMethod
