@@ -3,15 +3,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 
 public class SiteUrlTest {
     private WebDriver driver;
-    @BeforeTest
+    @BeforeMethod
     public void createChromeDriver(){
         System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
@@ -33,8 +33,28 @@ public class SiteUrlTest {
         String url2 = driver.getCurrentUrl();
         Assert.assertEquals(url2,url1, "У страниц разные URL");
     }
+     @Test
+    public void loginToTheSiteAndVerification(){
+        driver.get("http://nnmclub.to");
+        WebElement buttonAuthorization = driver.findElement(By
+                .xpath("//*[contains(text(),'Вход')]"));
+        buttonAuthorization.click();
+        WebElement login = driver.findElement(By.name("username"));
+        login.sendKeys("Ксения00788");
+        WebElement password = driver.findElement(By.name("password"));
+        password.sendKeys("zadanie");
+        WebElement buttonLogin =driver.findElement(By.className("mainoption"));
+        buttonLogin.click();
+        boolean isPresentButtonLogout = driver.findElements(By
+               .xpath("//*[contains(text(),'Выход [ Ксения00788 ]')]")).size()>0;
+        if (isPresentButtonLogout){
+            System.out.println("Вход на сайт был успешным");
+        }else {
+            System.out.println("Вход на сайт не был успешным");
+        }
+    }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
