@@ -31,7 +31,7 @@ public class SiteUrlTest {
         driver.switchTo().window(tabs2.get(1));
         String url1 = "http://nnmclub.to/";
         String url2 = driver.getCurrentUrl();
-        Assert.assertEquals(url2,url1, "У страниц разные URL");
+        Assert.assertEquals(url2,url1, "У страниц разные URL.");
     }
 
     @AfterTest
