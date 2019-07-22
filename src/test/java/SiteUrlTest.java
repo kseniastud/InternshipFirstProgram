@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 
 public class SiteUrlTest {
     private WebDriver driver;
-    @BeforeTest
+    @BeforeMethod
     public void createChromeDriver(){
         System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
@@ -78,7 +78,7 @@ public class SiteUrlTest {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
