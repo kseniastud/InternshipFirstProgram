@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.util.*;
@@ -11,6 +12,64 @@ import java.text.SimpleDateFormat;
 
 public class SiteUrlTest {
     private WebDriver driver;
+    public String searchForCategory(String selectTracker, String inputTrackerContainsTopic) {
+        driver.get("http://nnmclub.to");
+        String loginUser = "Ксения00788";
+        String passwordUser = "zadanie";
+        WebElement buttonAuthorization = driver.findElement(By
+                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Вход')]"));
+        buttonAuthorization.click();
+        WebElement login = driver.findElement(By.name("username"));
+        WebElement password = driver.findElement(By.name("password"));
+        WebElement buttonLogin = driver.findElement(By.name("login"));
+        login.sendKeys(loginUser);
+        password.sendKeys(passwordUser);
+        buttonLogin.click();
+        WebElement buttonSearch = driver.findElement(By.xpath("//input[contains(@name,'search_submit') and contains(@value, 'Искать')]"));
+        buttonSearch.click();
+
+        WebElement tracker = driver.findElement(By.xpath("//*/select[@id='fs-sel-cat']"));
+        tracker.click();
+        Select listBoxTracker = new Select(driver.findElement(By.xpath("//*/select[@id='fs-sel-cat']")));
+        listBoxTracker.selectByVisibleText("  ·  " + selectTracker + " ");
+        Select listOptgroup = new Select(driver.findElement(By.id("fs")));
+        Select listBoxTime = new Select(driver.findElement(By.xpath("//select[@name='tm']")));
+        WebElement searchSubmit = driver.findElement(By.name("submit"));
+        listOptgroup.selectByVisibleText(" |- " + inputTrackerContainsTopic + " ");
+        listBoxTime.selectByValue("-1");
+        searchSubmit.click();
+        return inputTrackerContainsTopic;
+    }
+    public void checkForCategory(String inputTrackerContainsTopic) {
+        String countOfPage =driver.findElement(By.xpath("//span/b[2]")).getText();
+        int countOfPageParseInt = Integer.parseInt(countOfPage);
+        for(int i = 1; i <=countOfPageParseInt; i++){
+            List<WebElement> foundCategoryOfSearch = driver.findElements(By.xpath("//td/a[@class='gen']"));
+            for (WebElement categoryFound : foundCategoryOfSearch) {
+                String categoryFoundText = categoryFound.getText();
+                Assert.assertEquals(categoryFoundText, inputTrackerContainsTopic);
+            }
+            int numberOfPage = i + 1;
+            if (countOfPageParseInt!=1 && numberOfPage<=countOfPageParseInt){
+                driver.findElement(By.xpath("//span[@class='nav']/a" + "[contains(text()," + numberOfPage + ")]")).click();
+            }
+        }
+    }
+    @DataProvider (name = "takeMyCategory")
+    public Object[][] myCategory(){
+        return new Object[][]{{"Трекер: Всё для детей и родителей", "Отечественные Фильмы для детей"},
+                {"Трекер: Всё для детей и родителей", "Обучающее Видео для родителей"},
+                {"Трекер: Всё для детей и родителей", "Развивающее Видео для детей"},
+                {"Трекер: Программы, Операционные системы", "Сборки Windows 10"},
+                {"Трекер: Программы, Операционные системы", "Сборки Windows 7"}
+        };
+    }
+    @Test (dataProvider = "takeMyCategory")
+    public void searchAndCheckCategory(String selectTracker, String inputTrackerContainsTopic){
+        String categoryTopic = searchForCategory(selectTracker, inputTrackerContainsTopic);
+        checkForCategory(categoryTopic);
+
+    }
     @BeforeMethod
     public void createChromeDriver(){
         System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
@@ -57,7 +116,7 @@ public class SiteUrlTest {
         WebElement lastThreeMonths = driver.findElement(By
                 .xpath("//option[@value='90']"));
         lastThreeMonths.click();
-        WebElement searchSubmit =driver.findElement(By.className("liteoption"));
+        WebElement searchSubmit =driver.findElement(By.name("submit"));
         searchSubmit.click();
         List<WebElement> foundTopicsOfSearch = driver.findElements(By.xpath("//*[@class='genmed topictitle']"));
         for(WebElement topic:foundTopicsOfSearch){
