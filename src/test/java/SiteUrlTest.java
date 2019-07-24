@@ -43,10 +43,10 @@ public class SiteUrlTest {
         login.sendKeys("Ксения00788");
         WebElement password = driver.findElement(By.name("password"));
         password.sendKeys("zadanie");
-        WebElement buttonLogin =driver.findElement(By.name("login");
+        WebElement buttonLogin =driver.findElement(By.name("login"));
         buttonLogin.click();
         Assert.assertTrue(driver.findElement(By
-                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Выход')]")).isDisplayed());
+                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Выход')]")).isDisplayed(), "Вход на сайт не был успешным");
     }
 
     @AfterMethod
