@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="SeleniumTest" verbose="1" >
-    <test name="NNM-Club: Торрент-трекер">
+<suite name="SeleniumTest">
+    <test name="NNM-Club: Торрент-трекер" verbose="1">
         <parameter name="browser" value="chrome" />
         <classes>
             <class name="SiteUrlTest" >
                 <methods>
-                    <include name="enterToTheSiteAndAssertion"/>
+                    <include name="enterToTheSiteAndAssertion" />
                     <include name="searchFunctionalityTest"/>
                     <include name="searchAndCheckCategory"/>
                 </methods>

@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 
 public class SiteUrlTest {
     private WebDriver driver;
-    public String searchForCategory(String selectTracker, String inputTrackerContainsTopic) {
+    private String searchForCategory(String selectTracker, String inputTrackerContainsTopic) {
         driver.get("http://nnmclub.to");
         String loginUser = "Ксения00788";
         String passwordUser = "zadanie";
@@ -40,7 +40,7 @@ public class SiteUrlTest {
         searchSubmit.click();
         return inputTrackerContainsTopic;
     }
-    public void checkForCategory(String inputTrackerContainsTopic) {
+    private void checkForCategory(String inputTrackerContainsTopic) {
         String countOfPage =driver.findElement(By.xpath("//span/b[2]")).getText();
         int countOfPageParseInt = Integer.parseInt(countOfPage);
         for(int i = 1; i <=countOfPageParseInt; i++){
