@@ -8,7 +8,7 @@ import java.util.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.ArrayList;
 public class SiteUrlTest {
     private WebDriver driver;
     @BeforeMethod
@@ -33,7 +33,22 @@ public class SiteUrlTest {
         String url2 = driver.getCurrentUrl();
         Assert.assertEquals(url2,url1, "У страниц разные URL");
     }
-    
+     @Test
+    public void loginToTheSiteAndVerification(){
+        driver.get("http://nnmclub.to");
+        WebElement buttonAuthorization = driver.findElement(By
+                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Вход')]"));
+        buttonAuthorization.click();
+        WebElement login = driver.findElement(By.name("username"));
+        login.sendKeys("Ксения00788");
+        WebElement password = driver.findElement(By.name("password"));
+        password.sendKeys("zadanie");
+        WebElement buttonLogin =driver.findElement(By.name("login"));
+        buttonLogin.click();
+        Assert.assertTrue(driver.findElement(By
+                .xpath("//*[contains(@class ,'mainmenu') and contains(text(),'Выход')]")).isDisplayed(), "Вход на сайт не был успешным");
+    }
+
     @Test
     public void searchFunctionalityTest() throws ParseException {
         String searchText = "java";

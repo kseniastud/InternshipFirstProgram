@@ -8,6 +8,7 @@
                 <methods>
                     <include name="enterToTheSiteAndAssertion"/>
                     <include name="searchFunctionalityTest"/>
+                    <include name="loginToTheSiteAndVerification"/>
                 </methods>
             </class>
         </classes>
