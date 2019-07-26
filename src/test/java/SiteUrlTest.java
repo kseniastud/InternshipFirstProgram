@@ -2,8 +2,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import pages.HomePage;
+import pages.HomePageAfterLogin;
+import pages.LoginPage;
+
 import java.util.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,7 +23,7 @@ public class SiteUrlTest {
         driver.manage().window().maximize();      
     }
 
-    @Test
+    @Test 
     public void enterToTheSiteAndAssertion() {
         driver.get("https://www.google.ru/");
         WebElement input = driver.findElement(By.xpath("//input[@name='q']"));
@@ -33,6 +38,18 @@ public class SiteUrlTest {
         String url2 = driver.getCurrentUrl();
         Assert.assertEquals(url2,url1, "У страниц разные URL");
     }
+    @Test
+    public void loginTestWithPageObject(){
+        driver.get("http://nnmclub.to");
+        HomePage pageHome = new HomePage(driver);
+        PageFactory.initElements(driver, pageHome);
+        LoginPage pageLogin = pageHome.loginEnter();
+        PageFactory.initElements(driver, pageLogin);
+        HomePageAfterLogin pageAfterLogin = pageLogin.loginAs("Ксения00788", "zadanie");
+        PageFactory.initElements(driver, pageAfterLogin);
+        pageAfterLogin.logoutAssert();
+    }
+
     
     @Test
     public void searchFunctionalityTest() throws ParseException {
