@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="methods" thread-count="3">
-    <test thread-count="3" verbose="2"  parallel="methods" name="NNM-Club: Торрент-трекер">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="SeleniumTest" verbose="1">
+    <test name="NNM-Club: Торрент-трекер">
         <parameter name="browser" value="chrome" />
         <classes>
             <class name="SiteUrlTest" >
                 <methods>
-                    <include name="enterToTheSiteAndAssertion" />
+                    <include name="enterToTheSiteAndAssertion"/>
                     <include name="searchFunctionalityTest"/>
                     <include name="loginToTheSiteAndVerification"/>
                 </methods>

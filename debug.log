@@ -1,4 +1,0 @@
-[0725/110600.698:ERROR:process_reader_win.cc(151)] SuspendThread: Отказано в доступе. (0x5)
-[0725/110600.698:ERROR:process_reader_win.cc(151)] SuspendThread: Отказано в доступе. (0x5)
-[0725/110600.699:ERROR:process_reader_win.cc(151)] SuspendThread: Отказано в доступе. (0x5)
-[0725/110600.699:ERROR:exception_snapshot_win.cc(98)] thread ID 9596 not found in process
