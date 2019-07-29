@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -12,6 +10,7 @@ import java.text.SimpleDateFormat;
 
 public class SiteUrlTest {
     private WebDriver driver;
+
     private String searchForCategory(String selectTracker, String inputTrackerContainsTopic) {
         driver.get("http://nnmclub.to");
         String loginUser = "Ксения00788";
@@ -25,19 +24,18 @@ public class SiteUrlTest {
         login.sendKeys(loginUser);
         password.sendKeys(passwordUser);
         buttonLogin.click();
-        WebElement buttonSearch = driver.findElement(By.xpath("//input[contains(@name,'search_submit') and contains(@value, 'Искать')]"));
-        buttonSearch.click();
-
-        WebElement tracker = driver.findElement(By.xpath("//*/select[@id='fs-sel-cat']"));
+        WebElement searchInputField = driver.findElement(By.name("nm"));
+        searchInputField.submit();
+        WebElement tracker = driver.findElement(By.id("fs-sel-cat"));
+        Select listBoxTracker = new Select(tracker);
         tracker.click();
-        Select listBoxTracker = new Select(driver.findElement(By.xpath("//*/select[@id='fs-sel-cat']")));
         listBoxTracker.selectByVisibleText("  ·  " + selectTracker + " ");
         Select listOptgroup = new Select(driver.findElement(By.id("fs")));
         Select listBoxTime = new Select(driver.findElement(By.xpath("//select[@name='tm']")));
         WebElement searchSubmit = driver.findElement(By.name("submit"));
         listOptgroup.selectByVisibleText(" |- " + inputTrackerContainsTopic + " ");
         listBoxTime.selectByValue("-1");
-        searchSubmit.click();
+        searchSubmit.submit();
         return inputTrackerContainsTopic;
     }
     private void checkForCategory(String inputTrackerContainsTopic) {
@@ -74,7 +72,7 @@ public class SiteUrlTest {
     public void createChromeDriver(){
         System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().window().maximize();      
+        driver.manage().window().maximize();
     }
 
     @Test
@@ -107,10 +105,9 @@ public class SiteUrlTest {
         WebElement buttonLogin =driver.findElement(By.name("login"));
         buttonLogin.click();
         WebElement searchInputField = driver.findElement(By
-               .xpath("//input[@name='nm']"));
+               .name("nm"));
         searchInputField.sendKeys(searchText);
-        WebElement buttonSearch = driver.findElement(By.name("search_submit"));
-        buttonSearch.click();
+        searchInputField.submit();
         WebElement selectPost = driver.findElement(By.xpath("//select[@name='tm']"));
         selectPost.click();
         WebElement lastThreeMonths = driver.findElement(By
